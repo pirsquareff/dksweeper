@@ -25,17 +25,17 @@ func main() {
 	app.Flags = []cli.Flag{
 		cli.StringFlag{
 			Name:   "username, u",
-			Usage:  "Docker Registry username",
+			Usage:  "Username to access Docker Registry",
 			EnvVar: "DOCKER_USERNAME",
 		},
 		cli.StringFlag{
 			Name:   "password, p",
-			Usage:  "Docker Registry password",
+			Usage:  "Password to access Docker Registry",
 			EnvVar: "DOCKER_PASSWORD",
 		},
 		cli.StringFlag{
 			Name:     "host",
-			Usage:    "Docker Registry host with protocol (http, https)",
+			Usage:    "Docker Registry host with a protocol (http, https)",
 			EnvVar:   "REGISTRY_HOST",
 			Required: true,
 		},
