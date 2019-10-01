@@ -12,7 +12,7 @@ import (
 func main() {
 	app := cli.NewApp()
 	app.Name = "Docker Registry Sweeper"
-	app.Usage = "Remove a reference between obsolete Docker images and their blobs for later removing by garbage collection"
+	app.Usage = "Remove a reference between obsolete Docker images and their blobs for later deleting by garbage collection"
 	app.Version = "1.0.1"
 	app.Compiled = time.Now()
 	app.Authors = []cli.Author{

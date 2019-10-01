@@ -1,6 +1,6 @@
 # Docker Registry Sweeper
 
-A CLI which helps you remove a reference between obsolete Docker images and their blobs for later removing by Docker built-in garbage collection
+A CLI which helps you remove a reference between obsolete Docker images and their blobs for later deleting by Docker built-in garbage collection
 
 ## How to use this CLI
 ### Run from Docker Image
