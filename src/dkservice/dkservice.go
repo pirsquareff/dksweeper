@@ -252,7 +252,7 @@ func (dks dockerService) getAllTag(repo string) []Tag {
 	return tags
 }
 
-func (dks dockerService) SweepOutdatedImages(repo string, thresholdAge, keepTag int) {
+func (dks dockerService) SweepOutdatedImages(repo string, olderThan, keepTag int) {
 	fmt.Printf("Repo: %s\n", repo)
 
 	// Get tag names and their created time
@@ -262,7 +262,7 @@ func (dks dockerService) SweepOutdatedImages(repo string, thresholdAge, keepTag 
 	fmt.Printf("%d tag(s)\n", len(tagsWithCreatedTime))
 
 	// Check created time against minDateToKeep
-	minDateToKeep := time.Now().UTC().AddDate(0, 0, -thresholdAge)
+	minDateToKeep := time.Now().UTC().AddDate(0, 0, -olderThan)
 	var tagsToDelete []Tag
 	for _, tag := range tagsWithCreatedTime {
 		if tag.CreatedTime.Before(minDateToKeep) {

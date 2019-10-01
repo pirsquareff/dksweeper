@@ -12,8 +12,8 @@ import (
 func main() {
 	app := cli.NewApp()
 	app.Name = "Docker Registry Sweeper"
-	app.Usage = "Remove a reference between obsolete Docker images and their blobs for later removing by garbage collector"
-	app.Version = "1.0.0"
+	app.Usage = "Remove a reference between obsolete Docker images and their blobs for later removing by garbage collection"
+	app.Version = "1.0.1"
 	app.Compiled = time.Now()
 	app.Authors = []cli.Author{
 		cli.Author{
@@ -46,14 +46,14 @@ func main() {
 			Required: true,
 		},
 		cli.IntFlag{
-			Name:     "max-age",
-			Usage:    "Keep images whose age is less than this value (in days). Older images will be unlinked with their blobs.",
-			EnvVar:   "MAX_AGE",
+			Name:     "older-than",
+			Usage:    "Delete images older than this value (in days)",
+			EnvVar:   "OLDER_THAN",
 			Required: true,
 		},
 		cli.IntFlag{
 			Name:     "keep-tag",
-			Usage:    "Number of tags to be preserved. If all the tags are outdated (by max-age), this parameter is to make sure that latest tags will not be unlinked.",
+			Usage:    "Number of tags to be preserved. This parameter is to make sure that latest tags will not be unlinked.",
 			EnvVar:   "KEEP_TAG",
 			Required: true,
 		},
@@ -78,12 +78,12 @@ func run(c *cli.Context) error {
 	dockerPassword := c.String("password")
 	host := c.String("host")
 	repo := c.String("repo")
-	maxAge := c.Int("max-age")
+	olderThan := c.Int("older-than")
 	keepTag := c.Int("keep-tag")
 	verbose := c.Bool("verbose")
 
 	dkService := dkservice.New(dockerUsername, dockerPassword, host, verbose)
-	dkService.SweepOutdatedImages(repo, maxAge, keepTag)
+	dkService.SweepOutdatedImages(repo, olderThan, keepTag)
 
 	return nil
 }
